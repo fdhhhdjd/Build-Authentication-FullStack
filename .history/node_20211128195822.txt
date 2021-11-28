@@ -1,0 +1,6 @@
+npm install express mysql2 sequelize jsonwebtoken dotenv bcrypt cookie-parser cors
+
+
+
+findAll():sử dụng khi bạn muốn lặp quá trình tìm kiếm cho toàn bộ các dòng trong tệp, nó sẽ trả về một danh sách tất cả các kết quả khớp chỉ với một bước. 
+ ... Nó sẽ tìm thấy tất cả các địa chỉ e-mail từ danh sách.

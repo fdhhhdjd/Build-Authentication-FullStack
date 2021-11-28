@@ -1,0 +1,1 @@
+npm install express mysql2 sequelize jsonwebtoken dotenv bcrypt cookie-parser cors
