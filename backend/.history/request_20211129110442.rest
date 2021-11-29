@@ -1,0 +1,22 @@
+GET http://localhost:5000/users
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJNIEZpa3JpIiwiZW1haWwiOiJlbWFpbEBnbWFpbC5jb20iLCJpYXQiOjE2MzgxNTg2NTUsImV4cCI6MTYzODE1ODY3NX0.hoAzH5Vx3cspDygg-I8JH9T9Dyjo2O3TCjjiWmevRIA
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "Nguyễn Tiến Tài11111",
+    "email": "nguyentientai10@gmail.com",
+    "password": "123456",
+    "confPassword":"123456"
+}
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "email@gmail.com",
+    "password": "123456"
+}

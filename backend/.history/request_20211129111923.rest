@@ -1,6 +1,5 @@
 GET http://localhost:5000/users
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsIm5hbWUiOiJOZ3V5P24gVGk_biBUw6BpIiwiZW1haWwiOiJuZ3V5ZW50aWVudGFpMTBAZ21haWwuY29tIiwiaWF0IjoxNjM4MTYyMzU2LCJleHAiOjE2MzgxNjIzNzF9.H7p4adrDPA5Tt0PFVPMxBbZyOPAdj2a7KQDDCfwre9U
-
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJNIEZpa3JpIiwiZW1haWwiOiJlbWFpbEBnbWFpbC5jb20iLCJpYXQiOjE2MzgxNTkzNzAsImV4cCI6MTYzODE1OTM5MH0.8AQvwL3cnKrBvPRD1Uxs9vmFXa58yA5Xu_oS77G3zSg
 ###
 POST http://localhost:5000/users
 Content-Type: application/json
@@ -20,9 +19,3 @@ Content-Type: application/json
     "email": "nguyentientai10@gmail.com",
     "password": "123456"
 }
-
-###
-GET http://localhost:5000/token
-
-###
-DELETE http://localhost:5000/logout

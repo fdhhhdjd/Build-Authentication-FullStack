@@ -1,11 +1,9 @@
 import Users from "../models/UserModel.js";
-import bcrypt from "bcrypt"; //ma hoa mk
+import bcrypt from "bcrypt"; // ma hoa mk
 import jwt from "jsonwebtoken";
 export const getUsers = async (req, res) => {
   try {
-    const users = await Users.findAll({
-      attributes: ["id", "name", "email"], //chi hien thi nhieu day
-    });
+    const users = await Users.findAll();
     res.json(users);
   } catch (error) {
     console.log(error);
@@ -14,7 +12,7 @@ export const getUsers = async (req, res) => {
 export const RegisterUser = async (req, res) => {
   const { name, email, password, confPassword } = req.body;
   if (password !== confPassword)
-    return res.status(400).json({ msg: "confirmPassword incorrect!" });
+    return res.status(400).json({ msg: "confirmPassword incorrect!  " });
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
   try {
@@ -68,27 +66,6 @@ export const Login = async (req, res) => {
     });
     res.json({ accessToken });
   } catch (error) {
-    res.status(404).json({ msg: "Account not exists" });
+    res.status(404).json({ msg: "Email not exist" });
   }
-};
-export const Logout = async (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-  if (!refreshToken) return res.sendStatus(204);
-  const user = await Users.findAll({
-    where: {
-      refresh_token: refreshToken,
-    },
-  });
-  if (!user[0]) return res.sendStatus(204);
-  const userId = user[0].id;
-  await Users.update(
-    { refresh_token: null },
-    {
-      where: {
-        id: userId,
-      },
-    }
-  );
-  res.clearCookie("refreshToken");
-  return res.sendStatus(200);
 };
