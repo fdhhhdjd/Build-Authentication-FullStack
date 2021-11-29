@@ -3,7 +3,6 @@ GET http://localhost:5000/users
 ###
 POST http://localhost:5000/users
 Content-Type: application/json
-
 {
     "name": "Nguyễn Tiến Tài",
     "email": "nguyentientai10@gmail.com",
