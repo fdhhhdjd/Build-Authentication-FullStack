@@ -18,12 +18,23 @@ export const RegisterUser = async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
   try {
-    await Users.create({
-      name: name,
-      email: email,
-      password: hashPassword,
+    const registered = await Users.findOne({
+      where : { 
+        email : req.body.email,
+      },
     });
-    res.json({ msg: "Register Success" });
+    if(!registered)
+    {
+      await Users.create({
+        name: name,
+        email: email,
+        password: hashPassword,
+      });
+      res.json({ msg: "Register Success" });
+    }
+    else{
+      res.status(401).json({ msg: "This email is already registered"})
+    }
   } catch (error) {
     console.log(error);
   }
