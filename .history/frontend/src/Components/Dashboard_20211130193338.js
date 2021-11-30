@@ -1,31 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navbar } from "../imports/index";
 import axios from "axios";
-import { TokenUserInitiate } from "../Redux/Action";
 import jwt_decode from "jwt-decode";
-import { useNavigate } from "react-router";
+
+import { TokenUserInitiate } from "../Redux/Action";
 const Dashboard = () => {
-  const [name, setName] = useState("");
-  const [token, setToken] = useState("");
+  const { tokenUser } = useSelector((state) => state.data);
   const dispatch = useDispatch();
-  const { errorToken, tokenUser } = useSelector((state) => state.data);
+  const [token, setToken] = useState("");
   const [expire, setExpire] = useState("");
   const [users, setUsers] = useState([]);
-  const Navigate = useNavigate();
-  console.log(users);
   const refreshToken = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/token");
-      setToken(response.data.accessToken);
-      const decoded = jwt_decode(response.data.accessToken);
-    } catch (error) {
-      if (error.response) {
-        Navigate("/");
-      }
-    }
+    const response = await axios.get("http://localhost:5000/token");
+    setToken(response.data.accessToken);
   };
-
   const axiosJWT = axios.create();
   axiosJWT.interceptors.request.use(
     async (config) => {
@@ -35,7 +24,6 @@ const Dashboard = () => {
         config.headers.Authorization = `Bearer ${response.data.accessToken}`;
         setToken(response.data.accessToken);
         const decoded = jwt_decode(response.data.accessToken);
-        setName(decoded.name);
         setExpire(decoded.exp);
       }
       return config;
@@ -52,16 +40,19 @@ const Dashboard = () => {
     });
     setUsers(response.data);
   };
+  if (error.status === 401) {
+    navigate("/");
+  }
   useEffect(() => {
     dispatch(TokenUserInitiate());
-    refreshToken();
     getUsers();
+    refreshToken();
   }, []);
   return (
     <>
       <Navbar />
       <div className="container mt-5">
-        <h1>Welcome Back: {name}</h1>
+        <h1>Welcome Back: {tokenUser ? tokenUser.name : "No User 🙄"}</h1>
         <button onClick={getUsers} className="button is-info">
           Get Users
         </button>

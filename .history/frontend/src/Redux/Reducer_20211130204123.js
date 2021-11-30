@@ -5,7 +5,6 @@ const initialState = {
   error: null,
   tokenUser: [],
   errorToken: null,
-  register: [],
 };
 const UserReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -46,6 +45,7 @@ const UserReducer = (state = initialState, action) => {
       };
     case types.REGISTER_FAIL:
     case types.LOGIN_FAIL:
+
     case types.LOGOUT_FAIL:
       return {
         ...state,

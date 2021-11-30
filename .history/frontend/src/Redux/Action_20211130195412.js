@@ -107,7 +107,7 @@ export const LogoutInitiate = () => {
     dispatch(logoutStart());
     try {
       const user = await axios.delete("http://localhost:5000/logout");
-      dispatch(logoutSuccess(user), toast.success("Logout Success !!"));
+      dispatch(logoutSuccess(user));
     } catch (error) {
       dispatch(logoutError(error), toast.success(error));
     }

@@ -2,6 +2,7 @@ import axios from "axios";
 import * as types from "./Actiontypes";
 import jwt_decode from "jwt-decode"; // giai ma ma hoa tai khoan user tu nodejs
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 export const RegisterStart = () => ({
   type: types.REGISTER_START,
 });
@@ -69,13 +70,20 @@ export const RegisterInitiate = (name, email, password, confPassword) => {
 };
 export const LoginInitiate = (email, password) => {
   return async function (dispatch) {
+    const Navigate = useNavigate();
     dispatch(LoginStart());
     try {
       const user = await axios.post("http://localhost:5000/login", {
         email: email,
         password: password,
       });
-      dispatch(LoginSuccess(user), toast.success("Login Success !!"));
+      dispatch(
+        LoginSuccess(user),
+        toast.success("Login Success !!")
+        // setTimeout(() => {
+        //   Navigate("/dashboard");
+        // }, 2000)
+      );
     } catch (error) {
       if (error.response) {
         dispatch(

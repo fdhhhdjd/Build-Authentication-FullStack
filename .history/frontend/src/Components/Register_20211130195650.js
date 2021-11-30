@@ -14,7 +14,7 @@ const Register = () => {
   let dispatch = useDispatch();
   const Navigate = useNavigate();
   const { name, email, password, confPassword } = state;
-  const { register, error } = useSelector((state) => state.data);
+  const { user, error } = useSelector((state) => state.data);
   const handleChange = (e) => {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
@@ -28,7 +28,7 @@ const Register = () => {
     }
     dispatch(RegisterInitiate(name, email, password, confPassword));
   };
-  if (register.status === 200) {
+  if (user.status === 200) {
     setTimeout(() => Navigate("/"), 2000);
   }
 

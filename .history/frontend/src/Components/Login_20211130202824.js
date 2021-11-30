@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,29 +12,36 @@ const Login = () => {
   };
   const [state, setState] = useState(initialState);
   const dispatch = useDispatch();
+  const form = useRef();
   const Navigate = useNavigate();
   const { email, password } = state;
-  const { error, user } = useSelector((state) => state.data);
+  const { error } = useSelector((state) => state.data);
   const handleChange = (e) => {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // if (!email & !password) {
+    //   return toast.error("Enter Please Input");
+    // } else if (dispatch(LoginInitiate(email, password))) {
+    //   setTimeout(() => {
+    //     Navigate("/dashboard");
+    //   }, 2000);
+    // }
+    form.current.validateAll();
     try {
       await axios.post("http://localhost:5000/login", {
         email: email,
         password: password,
       });
-      setTimeout(() => Navigate("/dashboard"), 2000);
-      toast.success("Login Success !!");
+      Navigate("/dashboard");
     } catch (error) {
       if (error.response) {
-        toast.error(error.response.data.msg);
+        console.log(error.response.data.msg);
       }
     }
   };
-
   return (
     <>
       <section className="hero has-background-grey-light is-fullheight is-fullwidth">
@@ -42,7 +49,7 @@ const Login = () => {
           <div className="container">
             <div className="columns is-centered">
               <div className="column is-4-desktop">
-                <form onSubmit={handleSubmit} className="box">
+                <form onSubmit={handleSubmit} className="box" ref={form}>
                   <p className="has-text-centered" style={{ color: "red" }}>
                     {error}
                   </p>

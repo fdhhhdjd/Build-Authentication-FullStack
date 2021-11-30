@@ -8,24 +8,24 @@ import { useNavigate } from "react-router";
 const Dashboard = () => {
   const [name, setName] = useState("");
   const [token, setToken] = useState("");
-  const dispatch = useDispatch();
-  const { errorToken, tokenUser } = useSelector((state) => state.data);
   const [expire, setExpire] = useState("");
   const [users, setUsers] = useState([]);
   const Navigate = useNavigate();
   console.log(users);
+
   const refreshToken = async () => {
     try {
       const response = await axios.get("http://localhost:5000/token");
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
+      setName(decoded.name);
+      setExpire(decoded.exp);
     } catch (error) {
       if (error.response) {
         Navigate("/");
       }
     }
   };
-
   const axiosJWT = axios.create();
   axiosJWT.interceptors.request.use(
     async (config) => {

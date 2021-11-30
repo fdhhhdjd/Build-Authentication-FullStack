@@ -15,17 +15,25 @@ const Dashboard = () => {
   const Navigate = useNavigate();
   console.log(users);
   const refreshToken = async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/token");
-      setToken(response.data.accessToken);
-      const decoded = jwt_decode(response.data.accessToken);
-    } catch (error) {
-      if (error.response) {
-        Navigate("/");
-      }
+    const response = await axios.get("http://localhost:5000/token");
+    setToken(response.data.accessToken);
+    if (errorToken) {
+      Navigate("/");
     }
   };
-
+  // const refreshToken = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:5000/token");
+  //     setToken(response.data.accessToken);
+  //     const decoded = jwt_decode(response.data.accessToken);
+  //     setName(decoded.name);
+  //     setExpire(decoded.exp);
+  //   } catch (error) {
+  //     if (error.response) {
+  //       Navigate("/");
+  //     }
+  //   }
+  // };
   const axiosJWT = axios.create();
   axiosJWT.interceptors.request.use(
     async (config) => {

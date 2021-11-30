@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as types from "./Actiontypes";
 import jwt_decode from "jwt-decode"; // giai ma ma hoa tai khoan user tu nodejs
-import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 export const RegisterStart = () => ({
   type: types.REGISTER_START,
 });
@@ -56,13 +56,10 @@ export const RegisterInitiate = (name, email, password, confPassword) => {
         password: password,
         confPassword: confPassword,
       });
-      dispatch(RegisterSuccess(user), toast.success("Register Success !!"));
+      dispatch(RegisterSuccess(user));
     } catch (error) {
       if (error.response) {
-        dispatch(
-          RegisterFail(error.response.data.msg),
-          toast.error(error.response.data.msg)
-        );
+        dispatch(RegisterFail(error.response.data.msg));
       }
     }
   };
@@ -75,18 +72,16 @@ export const LoginInitiate = (email, password) => {
         email: email,
         password: password,
       });
-      dispatch(LoginSuccess(user), toast.success("Login Success !!"));
+      dispatch(LoginSuccess(user));
     } catch (error) {
       if (error.response) {
-        dispatch(
-          LoginFail(error.response.data.msg),
-          toast.error(error.response.data.msg)
-        );
+        dispatch(LoginFail(error.response.data.msg));
       }
     }
   };
 };
 export const TokenUserInitiate = () => {
+  const Navigate = useNavigate();
   return async function (dispatch) {
     dispatch(TokenUserStart());
     try {
@@ -97,6 +92,7 @@ export const TokenUserInitiate = () => {
     } catch (error) {
       if (error.response) {
         dispatch(TokenUserFail(error.response));
+        Navigate("/");
       }
     }
   };
@@ -107,9 +103,9 @@ export const LogoutInitiate = () => {
     dispatch(logoutStart());
     try {
       const user = await axios.delete("http://localhost:5000/logout");
-      dispatch(logoutSuccess(user), toast.success("Logout Success !!"));
+      dispatch(logoutSuccess(user));
     } catch (error) {
-      dispatch(logoutError(error), toast.success(error));
+      dispatch(logoutError(error));
     }
   };
 };

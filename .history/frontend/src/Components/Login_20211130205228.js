@@ -35,6 +35,18 @@ const Login = () => {
     }
   };
 
+  // try {
+  //   await axios.post("http://localhost:5000/login", {
+  //     email: email,
+  //     password: password,
+  //   });
+  //   Navigate("/dashboard");
+  // } catch (error) {
+  //   if (error.response) {
+  //     console.log(error.response.data.msg);
+  //   }
+  // }
+
   return (
     <>
       <section className="hero has-background-grey-light is-fullheight is-fullwidth">

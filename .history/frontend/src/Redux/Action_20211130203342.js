@@ -75,7 +75,9 @@ export const LoginInitiate = (email, password) => {
         email: email,
         password: password,
       });
-      dispatch(LoginSuccess(user), toast.success("Login Success !!"));
+      dispatch(LoginSuccess(user), toast.success("Login Success !!"), setTimeout(() => {
+            Navigate("/dashboard");
+          }, 2000););
     } catch (error) {
       if (error.response) {
         dispatch(
@@ -96,7 +98,7 @@ export const TokenUserInitiate = () => {
       dispatch(TokenUserSuccess(decoded));
     } catch (error) {
       if (error.response) {
-        dispatch(TokenUserFail(error.response));
+        dispatch(TokenUserFail(error.response))
       }
     }
   };

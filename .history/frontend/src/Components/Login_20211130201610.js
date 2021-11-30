@@ -14,27 +14,32 @@ const Login = () => {
   const dispatch = useDispatch();
   const Navigate = useNavigate();
   const { email, password } = state;
-  const { error, user } = useSelector((state) => state.data);
+  const { error } = useSelector((state) => state.data);
   const handleChange = (e) => {
     let { name, value } = e.target;
     setState({ ...state, [name]: value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // if (!email & !password) {
+    //   return toast.error("Enter Please Input");
+    // } else if (dispatch(LoginInitiate(email, password))) {
+    //   setTimeout(() => {
+    //     Navigate("/dashboard");
+    //   }, 2000);
+    // }
     try {
       await axios.post("http://localhost:5000/login", {
         email: email,
         password: password,
       });
-      setTimeout(() => Navigate("/dashboard"), 2000);
-      toast.success("Login Success !!");
+      Navigate("/dashboard");
     } catch (error) {
       if (error.response) {
-        toast.error(error.response.data.msg);
+        setMsg(error.response.data.msg);
       }
     }
   };
-
   return (
     <>
       <section className="hero has-background-grey-light is-fullheight is-fullwidth">

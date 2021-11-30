@@ -26,7 +26,7 @@ const Login = () => {
         email: email,
         password: password,
       });
-      setTimeout(() => Navigate("/dashboard"), 2000);
+      setTimeout(() => Navigate("/"));
       toast.success("Login Success !!");
     } catch (error) {
       if (error.response) {
@@ -34,6 +34,18 @@ const Login = () => {
       }
     }
   };
+
+  // try {
+  //   await axios.post("http://localhost:5000/login", {
+  //     email: email,
+  //     password: password,
+  //   });
+  //   Navigate("/dashboard");
+  // } catch (error) {
+  //   if (error.response) {
+  //     console.log(error.response.data.msg);
+  //   }
+  // }
 
   return (
     <>

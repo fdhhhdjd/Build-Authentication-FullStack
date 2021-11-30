@@ -8,24 +8,24 @@ import { useNavigate } from "react-router";
 const Dashboard = () => {
   const [name, setName] = useState("");
   const [token, setToken] = useState("");
-  const dispatch = useDispatch();
-  const { errorToken, tokenUser } = useSelector((state) => state.data);
   const [expire, setExpire] = useState("");
   const [users, setUsers] = useState([]);
   const Navigate = useNavigate();
   console.log(users);
+
   const refreshToken = async () => {
     try {
       const response = await axios.get("http://localhost:5000/token");
       setToken(response.data.accessToken);
       const decoded = jwt_decode(response.data.accessToken);
+      setName(decoded.name);
+      setExpire(decoded.exp);
     } catch (error) {
       if (error.response) {
         Navigate("/");
       }
     }
   };
-
   const axiosJWT = axios.create();
   axiosJWT.interceptors.request.use(
     async (config) => {
@@ -53,7 +53,6 @@ const Dashboard = () => {
     setUsers(response.data);
   };
   useEffect(() => {
-    dispatch(TokenUserInitiate());
     refreshToken();
     getUsers();
   }, []);
@@ -61,7 +60,7 @@ const Dashboard = () => {
     <>
       <Navbar />
       <div className="container mt-5">
-        <h1>Welcome Back: {name}</h1>
+        {/* <h1>Welcome Back: {tokenUser ? tokenUser.name : "No User 🙄"}</h1> */}
         <button onClick={getUsers} className="button is-info">
           Get Users
         </button>
@@ -81,6 +80,12 @@ const Dashboard = () => {
                 <td>{user.email}</td>
               </tr>
             ))}
+            <tr>
+              <td>tai</td>
+              <td>tai</td>
+              <td>tai</td>
+              <td>tai</td>
+            </tr>
           </tbody>
         </table>
       </div>

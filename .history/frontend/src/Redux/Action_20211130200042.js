@@ -86,21 +86,21 @@ export const LoginInitiate = (email, password) => {
     }
   };
 };
-export const TokenUserInitiate = () => {
-  return async function (dispatch) {
-    dispatch(TokenUserStart());
-    try {
-      const user = await axios.get("http://localhost:5000/token");
-      const token = user.data.accessToken;
-      const decoded = jwt_decode(token);
-      dispatch(TokenUserSuccess(decoded));
-    } catch (error) {
-      if (error.response) {
-        dispatch(TokenUserFail(error.response));
-      }
-    }
-  };
-};
+// export const TokenUserInitiate = () => {
+//   return async function (dispatch) {
+//     dispatch(TokenUserStart());
+//     try {
+//       const user = await axios.get("http://localhost:5000/token");
+//       const token = user.data.accessToken;
+//       const decoded = jwt_decode(token);
+//       dispatch(TokenUserSuccess(decoded));
+//     } catch (error) {
+//       if (error.response) {
+//         dispatch(TokenUserFail(error.response));
+//       }
+//     }
+//   };
+// };
 
 export const LogoutInitiate = () => {
   return async function (dispatch) {

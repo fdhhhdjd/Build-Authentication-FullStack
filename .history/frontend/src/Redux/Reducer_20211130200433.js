@@ -5,7 +5,6 @@ const initialState = {
   error: null,
   tokenUser: [],
   errorToken: null,
-  register: [],
 };
 const UserReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -18,18 +17,12 @@ const UserReducer = (state = initialState, action) => {
         ...state,
         loading: true,
       };
-
+    case types.REGISTER_SUCCESS:
     case types.LOGIN_SUCCESS:
       return {
         ...state,
         loading: false,
         user: payload,
-      };
-    case types.REGISTER_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        register: payload,
       };
     case types.TOKEN_USER_SUCCESS:
       return {
@@ -46,6 +39,7 @@ const UserReducer = (state = initialState, action) => {
       };
     case types.REGISTER_FAIL:
     case types.LOGIN_FAIL:
+
     case types.LOGOUT_FAIL:
       return {
         ...state,

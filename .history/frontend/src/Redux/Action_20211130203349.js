@@ -75,7 +75,13 @@ export const LoginInitiate = (email, password) => {
         email: email,
         password: password,
       });
-      dispatch(LoginSuccess(user), toast.success("Login Success !!"));
+      dispatch(
+        LoginSuccess(user),
+        toast.success("Login Success !!"),
+        setTimeout(() => {
+          Navigate("/dashboard");
+        }, 2000)
+      );
     } catch (error) {
       if (error.response) {
         dispatch(

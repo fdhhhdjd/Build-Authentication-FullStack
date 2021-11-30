@@ -26,14 +26,25 @@ const Login = () => {
         email: email,
         password: password,
       });
-      setTimeout(() => Navigate("/dashboard"), 2000);
-      toast.success("Login Success !!");
+      Navigate("/dashboard");
     } catch (error) {
       if (error.response) {
-        toast.error(error.response.data.msg);
+        console.log(error.response.data.msg);
       }
     }
   };
+
+  // try {
+  //   await axios.post("http://localhost:5000/login", {
+  //     email: email,
+  //     password: password,
+  //   });
+  //   Navigate("/dashboard");
+  // } catch (error) {
+  //   if (error.response) {
+  //     console.log(error.response.data.msg);
+  //   }
+  // }
 
   return (
     <>

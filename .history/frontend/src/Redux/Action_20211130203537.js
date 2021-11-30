@@ -2,6 +2,7 @@ import axios from "axios";
 import * as types from "./Actiontypes";
 import jwt_decode from "jwt-decode"; // giai ma ma hoa tai khoan user tu nodejs
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 export const RegisterStart = () => ({
   type: types.REGISTER_START,
 });
@@ -68,6 +69,7 @@ export const RegisterInitiate = (name, email, password, confPassword) => {
   };
 };
 export const LoginInitiate = (email, password) => {
+  // const Navigate = useNavigate();
   return async function (dispatch) {
     dispatch(LoginStart());
     try {
@@ -75,7 +77,13 @@ export const LoginInitiate = (email, password) => {
         email: email,
         password: password,
       });
-      dispatch(LoginSuccess(user), toast.success("Login Success !!"));
+      dispatch(
+        LoginSuccess(user),
+        toast.success("Login Success !!")
+        // setTimeout(() => {
+        //   Navigate("/dashboard");
+        // }, 2000)
+      );
     } catch (error) {
       if (error.response) {
         dispatch(

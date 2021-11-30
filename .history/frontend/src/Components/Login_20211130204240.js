@@ -21,19 +21,28 @@ const Login = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      await axios.post("http://localhost:5000/login", {
-        email: email,
-        password: password,
-      });
-      setTimeout(() => Navigate("/dashboard"), 2000);
-      toast.success("Login Success !!");
-    } catch (error) {
-      if (error.response) {
-        toast.error(error.response.data.msg);
+    if (!email & !password) {
+      return toast.error("Enter Please Input");
+    } else if (dispatch(LoginInitiate(email, password))) {
+      if (user) {
+        setTimeout(() => {
+          Navigate("/dashboard");
+        }, 2000);
       }
     }
   };
+
+  // try {
+  //   await axios.post("http://localhost:5000/login", {
+  //     email: email,
+  //     password: password,
+  //   });
+  //   Navigate("/dashboard");
+  // } catch (error) {
+  //   if (error.response) {
+  //     console.log(error.response.data.msg);
+  //   }
+  // }
 
   return (
     <>

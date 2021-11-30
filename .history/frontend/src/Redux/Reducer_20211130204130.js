@@ -46,6 +46,7 @@ const UserReducer = (state = initialState, action) => {
       };
     case types.REGISTER_FAIL:
     case types.LOGIN_FAIL:
+
     case types.LOGOUT_FAIL:
       return {
         ...state,

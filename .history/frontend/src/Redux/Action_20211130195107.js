@@ -56,13 +56,10 @@ export const RegisterInitiate = (name, email, password, confPassword) => {
         password: password,
         confPassword: confPassword,
       });
-      dispatch(RegisterSuccess(user), toast.success("Register Success !!"));
+      dispatch(RegisterSuccess(user));
     } catch (error) {
       if (error.response) {
-        dispatch(
-          RegisterFail(error.response.data.msg),
-          toast.error(error.response.data.msg)
-        );
+        dispatch(RegisterFail(error.response.data.msg));
       }
     }
   };
@@ -78,10 +75,7 @@ export const LoginInitiate = (email, password) => {
       dispatch(LoginSuccess(user), toast.success("Login Success !!"));
     } catch (error) {
       if (error.response) {
-        dispatch(
-          LoginFail(error.response.data.msg),
-          toast.error(error.response.data.msg)
-        );
+        dispatch(LoginFail(error.response.data.msg));
       }
     }
   };
@@ -107,9 +101,9 @@ export const LogoutInitiate = () => {
     dispatch(logoutStart());
     try {
       const user = await axios.delete("http://localhost:5000/logout");
-      dispatch(logoutSuccess(user), toast.success("Logout Success !!"));
+      dispatch(logoutSuccess(user));
     } catch (error) {
-      dispatch(logoutError(error), toast.success(error));
+      dispatch(logoutError(error));
     }
   };
 };
