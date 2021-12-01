@@ -25,7 +25,7 @@ export const RegisterUser = async (req, res) => {
       },
     });
     if (registered) {
-      res.status(401).json({ msg: "this email has been registered!" });
+      res.status(401).jon({ msg: "this email has been registered!" });
     } else {
       await Users.create({
         name: name,
