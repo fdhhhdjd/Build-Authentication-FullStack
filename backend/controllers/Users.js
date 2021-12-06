@@ -80,7 +80,7 @@ export const Login = async (req, res) => {
   } catch (error) {
     res.status(404).json({ msg: "Account not exists" });
   }
-  console.log(process.ACCESS_TOKEN_SECRET);
+  console.log(process.env.ACCESS_TOKEN_SECRET);
 };
 export const Logout = async (req, res) => {
   const refreshToken = req.cookies.refreshToken;

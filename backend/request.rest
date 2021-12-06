@@ -1,5 +1,6 @@
-GET http://localhost:5000/users
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI2LCJuYW1lIjoiTmd1eT9uIFRpP24gVMOgaTExMTExIiwiZW1haWwiOiJuZ3V5ZW50aWVudGFpMTBAZ21haWwuY29tIiwiaWF0IjoxNjM4MTg4MjY3LCJleHAiOjE2MzgxODgyODJ9.GJqmEOgLs6NsWut38Bmv7teEOHarYapE-xe15WoH-EI
+
+GET  http://localhost:5000/users
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIxLCJuYW1lIjoiTmd1eT9uIFRpP24gVMOgaTExMTEyIiwiZW1haWwiOiJuZ3V5ZW50aWVudGFpMTRAZ21haWwuY29tIiwiaWF0IjoxNjM4ODEyNjE1LCJleHAiOjE2Mzg4MTI2MzB9.NTYr8lCzj7HxewyRnls_sID8uqsvxejfWpw_SwgBiZ0
 
 ###
 POST http://localhost:5000/users
@@ -7,7 +8,7 @@ Content-Type: application/json
 
 {
     "name": "Nguyễn Tiến Tài11112",
-    "email": "nguyentientai12@gmail.com",
+    "email": "nguyentientai14@gmail.com",
     "password": "123456",
     "confPassword":"123456"
 }
@@ -17,7 +18,7 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "nguyentientai12@gmail.com",
+    "email": "nguyentientai14@gmail.com",
     "password": "123456"
 }
 
